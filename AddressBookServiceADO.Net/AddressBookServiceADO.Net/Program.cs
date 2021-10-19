@@ -11,6 +11,8 @@ namespace AddressBookServiceADO.Net
             AddressBookRepo addressBookRepo = new AddressBookRepo();
             /// Calling the GetAllEntries method from AddressBookRepo class
             addressBookRepo.DBconnection();
+
+            addressBookRepo.GetAllEntries();
         }
     }
 }
