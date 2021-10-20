@@ -133,5 +133,29 @@ namespace AddressBookServiceADO.Net
             return false;
 
         }
+
+        public bool UpdateContact(AddressBookModel model)
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    connection.Open();
+                    string query = @"update Address_Book set Zipcode='281006' where FirstName = 'Natasha'";
+                    SqlCommand command = new SqlCommand(query, this.connection);
+                    var result = command.ExecuteNonQuery();
+                    connection.Close();
+                    if (result != 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
