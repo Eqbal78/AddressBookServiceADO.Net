@@ -12,7 +12,19 @@ namespace AddressBookServiceADO.Net
             /// Calling the GetAllEntries method from AddressBookRepo class
             addressBookRepo.DBconnection();
 
-            addressBookRepo.GetAllEntries();
+            AddressBookModel model = new AddressBookModel();
+            model.FirstName = "Natasha";
+            model.LastName = "Romanova";
+            model.City = "New York City";
+            model.State = "New York";
+            model.Zip = "100254";
+            model.PhoneNo = "3645217896";
+            model.Email = "blackwidow@gmail.com";
+            model.AddressBookName = "office";
+            model.ContactType = "Friend";
+            model.Address = "Stark Tower 59th Street Broadway";
+            Console.WriteLine(addressBookRepo.AddContacts(model) ? "Record inserted successfully " : "Failed");
+            //addressBookRepo.GetAllEntries();
         }
     }
 }

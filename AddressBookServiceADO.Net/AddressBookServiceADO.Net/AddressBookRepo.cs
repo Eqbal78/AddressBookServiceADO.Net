@@ -85,5 +85,53 @@ namespace AddressBookServiceADO.Net
                 connection.Close();
             }
         }
+
+        /// <summary>
+        /// Add Contact details
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool AddContacts(AddressBookModel model)
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    //define the SqlCommand object and pass queary od Storage procedure
+                    SqlCommand command = new SqlCommand("SpAddContactDetail", connection);
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@FirstName", model.FirstName);
+                    command.Parameters.AddWithValue("@LastName", model.LastName);
+                    command.Parameters.AddWithValue("@Address", model.Address);
+                    command.Parameters.AddWithValue("@City", model.City);
+                    command.Parameters.AddWithValue("@State", model.State);
+                    command.Parameters.AddWithValue("@Zipcode", model.Zip);
+                    command.Parameters.AddWithValue("@PhoneNumber", model.PhoneNo);
+                    command.Parameters.AddWithValue("@Email", model.Email);
+                    command.Parameters.AddWithValue("@addressbook_name", model.AddressBookName);
+                    command.Parameters.AddWithValue("@type", model.ContactType);
+                    connection.Open();
+                    int result = command.ExecuteNonQuery();
+                    connection.Close();
+
+                    if (result != 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return false;
+
+        }
     }
 }
