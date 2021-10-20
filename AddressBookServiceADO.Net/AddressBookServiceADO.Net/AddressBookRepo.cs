@@ -157,5 +157,38 @@ namespace AddressBookServiceADO.Net
                 throw new Exception(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Delete contact detail
+        /// </summary>
+        /// <returns></returns>
+        public bool DeleteContact()
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    connection.Open();
+                    string query = @"delete from Address_Book where FirstName='Peter'";
+                    SqlCommand command = new SqlCommand(query, this.connection);
+                    var result = command.ExecuteNonQuery();
+                    connection.Close();
+                    if (result != 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return false;
+        }
     }
 }
