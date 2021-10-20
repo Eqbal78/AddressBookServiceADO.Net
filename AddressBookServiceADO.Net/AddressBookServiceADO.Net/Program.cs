@@ -34,7 +34,10 @@ namespace AddressBookServiceADO.Net
             //Console.WriteLine(addressBookRepo.UpdateContact(model) ? "Record Updated successfully " : "Failed");
 
             /// Calling the DeleteContacr method from AddressBookRepo class
-            Console.WriteLine(addressBookRepo.DeleteContact() ? "Record Deleted successfully " : "Failed");
+            //Console.WriteLine(addressBookRepo.DeleteContact() ? "Record Deleted successfully " : "Failed");
+
+            /// Calling the DeleteContacr method from AddressBookRepo class
+            addressBookRepo.GetPersonByCityOrState();
         }
     }
 }

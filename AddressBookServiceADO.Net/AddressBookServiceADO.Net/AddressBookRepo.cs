@@ -190,5 +190,51 @@ namespace AddressBookServiceADO.Net
             }
             return false;
         }
+
+        /// <summary>
+        /// Get contact detail by City or State
+        /// </summary>
+
+        public void GetPersonByCityOrState()
+        {
+            AddressBookModel model = new AddressBookModel();
+            try
+            {
+                using (this.connection)
+                {
+                    string query = @"select * from Address_Book where City='Manhattan' or State='New York'";
+                    SqlCommand command = new SqlCommand(query, this.connection);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            model.FirstName = reader["FirstName"].ToString();
+                            model.LastName = reader["LastName"].ToString();
+                            model.City = reader["City"].ToString();
+                            model.State = reader["State"].ToString();
+                            model.Zip = reader["Zipcode"].ToString();
+                            model.PhoneNo = reader["PhoneNumber"].ToString();
+                            model.Email = reader["Email"].ToString();
+                            model.AddressBookName = reader["addressbook_name"].ToString();
+                            model.ContactType = reader["type"].ToString();
+                            model.Address = reader["Address"].ToString();
+                            Console.WriteLine("{0} {1}", model.FirstName, model.LastName);
+                        }
+                    }
+                    else
+                        Console.WriteLine("No data found");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }
